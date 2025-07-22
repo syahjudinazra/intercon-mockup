@@ -1,179 +1,293 @@
+<script setup>
+import { ref } from 'vue'
+const visibleLiveDemo = ref(false)
+const visibleLiveDemo2 = ref(false)
+</script>
 <template>
-  <CRow>
-    <CCol :xs="12">
-      <DocsComponents href="components/accordion.html" />
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Accordion</strong>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Click the accordions below to expand/collapse the accordion content.
-          </p>
-          <DocsExample href="components/accordion.html">
-            <CAccordion>
-              <CAccordionItem :item-key="1">
-                <CAccordionHeader> Accordion Item #1 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the first item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem :item-key="2">
-                <CAccordionHeader> Accordion Item #2 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the second item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem :item-key="3">
-                <CAccordionHeader> Accordion Item #3 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the third item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-            </CAccordion>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Accordion</strong> <small>Flush</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Add <code>flush</code> to remove the default
-            <code>background-color</code>, some borders, and some rounded
-            corners to render accordions edge-to-edge with their parent
-            container.
-          </p>
-          <DocsExample href="components/accordion.html#flush">
-            <CAccordion flush>
-              <CAccordionItem>
-                <CAccordionHeader> Accordion Item #1 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the first item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem>
-                <CAccordionHeader> Accordion Item #2 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the second item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem>
-                <CAccordionHeader> Accordion Item #3 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the third item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-            </CAccordion>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Accordion</strong> <small>Always open</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Add <code>always-open</code> property to make accordion items stay
-            open when another item is opened.
-          </p>
-          <DocsExample href="components/accordion.html#always-open">
-            <CAccordion :active-item-key="2" always-open>
-              <CAccordionItem :item-key="1">
-                <CAccordionHeader> Accordion Item #1 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the first item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem :item-key="2">
-                <CAccordionHeader> Accordion Item #2 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the second item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem :item-key="3">
-                <CAccordionHeader> Accordion Item #3 </CAccordionHeader>
-                <CAccordionBody>
-                  <strong>This is the third item's accordion body.</strong> It
-                  is hidden by default, until the collapse plugin adds the
-                  appropriate classes that we use to style each element. These
-                  classes control the overall appearance, as well as the showing
-                  and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also
-                  worth noting that just about any HTML can go within the
-                  <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
-              </CAccordionItem>
-            </CAccordion>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-  </CRow>
+  <h2>Bangunan Baru</h2>
+  <div class="d-flex justify-content-between gap-2 mb-3">
+    <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
+    <div class="utility-table d-flex gap-2">
+      <CButton color="danger">PDF</CButton>
+      <CDropdown variant="btn-group">
+        <CDropdownToggle color="success">Excel</CDropdownToggle>
+        <CDropdownMenu>
+          <CDropdownItem href="#">Export data</CDropdownItem>
+          <CDropdownItem href="#">Import data</CDropdownItem>
+        </CDropdownMenu>
+      </CDropdown>
+      <CInputGroup>
+        <CFormInput placeholder="Cari..." aria-label="Cari..." aria-describedby="button-addon2" />
+        <CButton type="button" color="secondary" variant="outline" id="button-addon2"
+          >Search</CButton
+        >
+      </CInputGroup>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Tanggal Masuk</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Nominal</th>
+        <th scope="col">Keterangan</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>18/07/2025</td>
+        <td>Iuran warga</td>
+        <td>Rp. 250.000,00</td>
+        <td>Saya telah membayar iuran bulan Juli 2025, dan sudah melampirkan bukti pembayaran.</td>
+        <td class="d-flex gap-2">
+          <a
+            href="#"
+            :class="{ 'text-decoration-none': true }"
+            @click.prevent="
+              () => {
+                visibleLiveDemo = true
+              }
+            "
+            class="text-primary"
+          >
+            Lihat
+          </a>
+          <!-- Default dropend button -->
+          <div class="btn-group dropend">
+            <a
+              href="#"
+              class="dropdown-toggle text-decoration-none"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Lainya
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo = true
+                    }
+                  "
+                >
+                  Ubah
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+              </li>
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo2 = true
+                    }
+                  "
+                >
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>11/07/2025</td>
+        <td>Iuran lingkungan</td>
+        <td>Rp. 500.000,00</td>
+        <td>
+          Saya telah membayar iuran lingkungan bulan Juli 2025, dan sudah melampirkan bukti
+          pembayaran.
+        </td>
+        <td class="d-flex gap-2">
+          <a
+            href="#"
+            :class="{ 'text-decoration-none': true }"
+            @click.prevent="
+              () => {
+                visibleLiveDemo = true
+              }
+            "
+            class="text-primary"
+          >
+            Lihat
+          </a>
+          <!-- Default dropend button -->
+          <div class="btn-group dropend">
+            <a
+              href="#"
+              class="dropdown-toggle text-decoration-none"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Lainya
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo = true
+                    }
+                  "
+                >
+                  Ubah
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+              </li>
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo2 = true
+                    }
+                  "
+                >
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer-table d-flex justify-content-between">
+    <div>
+      <span>Menampilkan 1-2 dari 2 data</span>
+    </div>
+    <div>
+      <!-- Pagination -->
+      <CPagination align="end" aria-label="Page navigation example">
+        <CPaginationItem aria-label="Previous" href="#" disabled
+          ><span aria-hidden="true">&laquo;</span></CPaginationItem
+        >
+        <CPaginationItem href="#" active>1</CPaginationItem>
+        <CPaginationItem href="#">2</CPaginationItem>
+        <CPaginationItem href="#">3</CPaginationItem>
+        <CPaginationItem aria-label="Next" href="#"
+          ><span aria-hidden="true">&raquo;</span></CPaginationItem
+        >
+      </CPagination>
+    </div>
+  </div>
+  <!-- Modal -->
+  <CModal
+    :visible="visibleLiveDemo"
+    @close="
+      () => {
+        visibleLiveDemo = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah Proyek</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="mb-3">
+        <CFormInput
+          type="date"
+          id="tanggal-masuk"
+          label="Tanggal masuk"
+          placeholder="Masukan tanggal masuk"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CFormSelect
+        class="mb-3"
+        id="exampleFormControlSelect1"
+        label="Pilih kategori"
+        :options="[
+          { label: 'Pilihan', value: '' },
+          { label: 'Iuran warga', value: '1' },
+          { label: 'Iuran lingkungan', value: '2' },
+          { label: 'Iuran keamanan', value: '3' },
+        ]"
+      ></CFormSelect>
+      <CForm class="mb-3">
+        <CFormInput
+          type="number"
+          id="nominal"
+          label="Nominal"
+          placeholder="Masukan nominal"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CFormTextarea
+        class="mb-3"
+        id="exampleFormControlTextarea1"
+        label="Keterangan"
+        placeholder="Deskripsi, alamat, dsb"
+        rows="3"
+      ></CFormTextarea>
+      <CFormInput type="file" id="formFile" label="Upload bukti pembayaran bangunan baru" />
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="primary">Submit</CButton>
+    </CModalFooter>
+  </CModal>
+
+  <!-- Modal Hapus-->
+  <CModal
+    :visible="visibleLiveDemo2"
+    @close="
+      () => {
+        visibleLiveDemo2 = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Contoh peringatan hapus data</CModalTitle>
+    </CModalHeader>
+    <CModalBody>Apakah anda yakin ingin menghapus data ini?</CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo2 = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="danger">Hapus</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
+
+<style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

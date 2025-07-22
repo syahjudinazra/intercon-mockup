@@ -4,9 +4,9 @@ const visibleLiveDemo = ref(false)
 const visibleLiveDemo2 = ref(false)
 </script>
 <template>
-  <h2>Proyek</h2>
+  <h2>Uang Masuk</h2>
   <div class="d-flex justify-content-between gap-2 mb-3">
-    <CButton color="primary" @click="visibleLiveDemo = true">Tambah Proyek</CButton>
+    <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
     <div class="utility-table d-flex gap-2">
       <CButton color="danger">PDF</CButton>
       <CDropdown variant="btn-group">
@@ -28,9 +28,10 @@ const visibleLiveDemo2 = ref(false)
     <thead>
       <tr>
         <th scope="col">No</th>
-        <th scope="col">Tanggal Mulai</th>
-        <th scope="col">Nama Proyek</th>
-        <th scope="col">Tanggal Selesai</th>
+        <th scope="col">Tanggal Masuk</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Nominal</th>
+        <th scope="col">Keterangan</th>
         <th scope="col">Aksi</th>
       </tr>
     </thead>
@@ -38,8 +39,9 @@ const visibleLiveDemo2 = ref(false)
       <tr>
         <th scope="row">1</th>
         <td>18/07/2025</td>
-        <td>Pembangunan Jalan</td>
-        <td>25/07/2025</td>
+        <td>Iuran warga</td>
+        <td>Rp. 250.000,00</td>
+        <td>Saya telah membayar iuran bulan Juli 2025, dan sudah melampirkan bukti pembayaran.</td>
         <td class="d-flex gap-2">
           <a
             href="#"
@@ -100,70 +102,12 @@ const visibleLiveDemo2 = ref(false)
       <tr>
         <th scope="row">2</th>
         <td>11/07/2025</td>
-        <td>Pembangunan jembatan</td>
-        <td>20/07/2025</td>
-        <td class="d-flex gap-2">
-          <a
-            href="#"
-            :class="{ 'text-decoration-none': true }"
-            @click.prevent="
-              () => {
-                visibleLiveDemo = true
-              }
-            "
-            class="text-primary"
-          >
-            Lihat
-          </a>
-          <!-- Default dropend button -->
-          <div class="btn-group dropend">
-            <a
-              href="#"
-              class="dropdown-toggle text-decoration-none"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Lainya
-            </a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item">
-                <a
-                  href="#"
-                  :class="{ 'text-decoration-none': true }"
-                  @click.prevent="
-                    () => {
-                      visibleLiveDemo = true
-                    }
-                  "
-                >
-                  Ubah
-                </a>
-              </li>
-              <li class="dropdown-item">
-                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
-              </li>
-              <li class="dropdown-item">
-                <a
-                  href="#"
-                  :class="{ 'text-decoration-none': true }"
-                  @click.prevent="
-                    () => {
-                      visibleLiveDemo2 = true
-                    }
-                  "
-                >
-                  Hapus
-                </a>
-              </li>
-            </ul>
-          </div>
+        <td>Iuran lingkungan</td>
+        <td>Rp. 500.000,00</td>
+        <td>
+          Saya telah membayar iuran lingkungan bulan Juli 2025, dan sudah melampirkan bukti
+          pembayaran.
         </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>12/07/2025</td>
-        <td>Perbaikan pagar</td>
-        <td>16/07/2025</td>
         <td class="d-flex gap-2">
           <a
             href="#"
@@ -225,7 +169,7 @@ const visibleLiveDemo2 = ref(false)
   </table>
   <div class="footer-table d-flex justify-content-between">
     <div>
-      <span>Menampilkan 1-3 dari 3 data</span>
+      <span>Menampilkan 1-2 dari 2 data</span>
     </div>
     <div>
       <!-- Pagination -->
@@ -253,42 +197,46 @@ const visibleLiveDemo2 = ref(false)
     aria-labelledby="LiveDemoExampleLabel"
   >
     <CModalHeader>
-      <CModalTitle id="LiveDemoExampleLabel">Tambah Proyek</CModalTitle>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah Uang Masuk</CModalTitle>
     </CModalHeader>
     <CModalBody>
       <CForm class="mb-3">
         <CFormInput
           type="date"
-          id="tanggal-mulai"
-          label="Tanggal mulai"
-          placeholder="Masukan tanggal mulai"
+          id="tanggal-masuk"
+          label="Tanggal masuk"
+          placeholder="Masukan tanggal masuk"
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
+      <CFormSelect
+        class="mb-3"
+        id="exampleFormControlSelect1"
+        label="Pilih kategori"
+        :options="[
+          { label: 'Pilihan', value: '' },
+          { label: 'Iuran warga', value: '1' },
+          { label: 'Iuran lingkungan', value: '2' },
+          { label: 'Iuran keamanan', value: '3' },
+        ]"
+      ></CFormSelect>
       <CForm class="mb-3">
         <CFormInput
-          type="text"
-          id="nama-proyek"
-          label="Nama Proyek"
-          placeholder="Masukan nama proyek"
-          aria-describedby="exampleFormControlInputHelpInline"
-        />
-      </CForm>
-      <CForm class="mb-3">
-        <CFormInput
-          type="date"
-          id="tanggal-selesai"
-          label="Tanggal selesai"
-          placeholder="Masukan tanggal selesai"
+          type="number"
+          id="nominal"
+          label="Nominal"
+          placeholder="Masukan nominal"
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
       <CFormTextarea
+        class="mb-3"
         id="exampleFormControlTextarea1"
         label="Keterangan"
         placeholder="Deskripsi, alamat, dsb"
         rows="3"
       ></CFormTextarea>
+      <CFormInput type="file" id="formFile" label="Upload bukti uang masuk" />
     </CModalBody>
     <CModalFooter>
       <CButton
@@ -334,3 +282,12 @@ const visibleLiveDemo2 = ref(false)
     </CModalFooter>
   </CModal>
 </template>
+
+<style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

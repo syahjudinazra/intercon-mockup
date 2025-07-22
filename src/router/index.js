@@ -18,12 +18,29 @@ const routes = [
       {
         path: '/proyek',
         name: 'Proyek',
-        redirect: '/proyek',
+        component: () => import('@/views/Proyek.vue'),
       },
       {
         path: '/operasional',
         name: 'Operasional',
-        component: () => import('@/views/Operasional.vue'),
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/operasional/uang-masuk',
+        children: [
+          {
+            path: '/operasional/uang-masuk',
+            name: 'Uang Masuk',
+            component: () => import('@/views/operasional/UangMasuk.vue'),
+          },
+          {
+            path: '/operasional/uang-keluar',
+            name: 'Uang Keluar',
+            component: () => import('@/views/operasional/UangKeluar.vue'),
+          },
+        ],
       },
       {
         path: '/proyek',

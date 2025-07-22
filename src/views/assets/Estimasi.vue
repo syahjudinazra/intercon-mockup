@@ -1,418 +1,313 @@
+<script setup>
+import { ref } from 'vue'
+const visibleLiveDemo = ref(false)
+const visibleLiveDemo2 = ref(false)
+const penyusutan = ref([
+  { label: 'Penyusutan ke-1', value: 'Rp. 18.000.000,00' },
+  { label: 'Penyusutan ke-2', value: 'Rp. 15.000.000,00' },
+  { label: 'Penyusutan ke-3', value: 'Rp. 12.000.000,00' },
+])
+</script>
 <template>
-  <CRow>
-    <CCol :xs="12">
-      <DocsComponents href="components/button-group.html" />
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Basic example</span>
-        </CCardHeader>
-        <CCardBody>
-          <p>
-            Wrap a series of <code>&lt;CButton&gt;</code> components in
-            <code>&lt;CButtonGroup&gt;</code>.
-          </p>
-          <DocsExample href="components/button-group.html">
-            <CButtonGroup role="group" aria-label="Basic example">
-              <CButton color="primary">Left</CButton>
-              <CButton color="primary">Middle</CButton>
-              <CButton color="primary">Right</CButton>
-            </CButtonGroup>
-          </DocsExample>
-          <p>
-            These classes can also be added to groups of links, as an
-            alternative to the
-            <code>&lt;CNav&gt;</code> components.
-          </p>
-          <DocsExample href="components/button-group.html">
-            <CButtonGroup>
-              <CButton href="#" color="primary" active> Active link </CButton>
-              <CButton href="#" color="primary"> Link </CButton>
-              <CButton href="#" color="primary"> Link </CButton>
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Mixed styles</span>
-        </CCardHeader>
-        <CCardBody>
-          <DocsExample href="components/button-group.html#mixed-styles">
-            <CButtonGroup role="group" aria-label="Basic mixed styles example">
-              <CButton color="danger">Left</CButton>
-              <CButton color="warning">Middle</CButton>
-              <CButton color="success">Right</CButton>
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Outlined styles</span>
-        </CCardHeader>
-        <CCardBody>
-          <DocsExample href="components/button-group.html#outlined-styles">
-            <CButtonGroup role="group" aria-label="Basic outlined example">
-              <CButton color="primary" variant="outline"> Left </CButton>
-              <CButton color="primary" variant="outline"> Middle </CButton>
-              <CButton color="primary" variant="outline"> Right </CButton>
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong>
-          <span>Checkbox and radio button groups</span>
-        </CCardHeader>
-        <CCardBody>
-          <p>
-            Combine button-like checkbox and radio toggle buttons into a
-            seamless looking button group.
-          </p>
-          <DocsExample
-            href="components/button-group.html#checkbox-and-radio-button-groups"
+  <h2>Estimasi</h2>
+  <div class="d-flex justify-content-between gap-2 mb-3">
+    <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
+    <div class="utility-table d-flex gap-2">
+      <CButton color="danger">PDF</CButton>
+      <CDropdown variant="btn-group">
+        <CDropdownToggle color="success">Excel</CDropdownToggle>
+        <CDropdownMenu>
+          <CDropdownItem href="#">Export data</CDropdownItem>
+          <CDropdownItem href="#">Import data</CDropdownItem>
+        </CDropdownMenu>
+      </CDropdown>
+      <CInputGroup>
+        <CFormInput placeholder="Cari..." aria-label="Cari..." aria-describedby="button-addon2" />
+        <CButton type="button" color="secondary" variant="outline" id="button-addon2"
+          >Search</CButton
+        >
+      </CInputGroup>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Tanggal Masuk</th>
+        <th scope="col">Nama Asset</th>
+        <th scope="col">Harga</th>
+        <th scope="col">Penyusutan ke-1</th>
+        <th scope="col">Penyusutan ke-2</th>
+        <th scope="col">Penyusutan ke-3</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>18/07/2025</td>
+        <td>Motor</td>
+        <td>Rp. 20.000.000,00</td>
+        <td><del>Rp. 18.000.000,00</del></td>
+        <td><del>Rp. 15.000.000,00</del></td>
+        <td><del>Rp. 12.000.000,00</del></td>
+        <td class="d-flex gap-2">
+          <a
+            href="#"
+            :class="{ 'text-decoration-none': true }"
+            @click.prevent="
+              () => {
+                visibleLiveDemo = true
+              }
+            "
+            class="text-primary"
           >
-            <CButtonGroup
-              role="group"
-              aria-label="Basic checkbox toggle button group"
+            Lihat
+          </a>
+          <!-- Default dropend button -->
+          <div class="btn-group dropend">
+            <a
+              href="#"
+              class="dropdown-toggle text-decoration-none"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              <CFormCheck
-                id="btncheck1"
-                :button="{ color: 'primary', variant: 'outline' }"
-                autocomplete="off"
-                label="Checkbox 1"
-              />
-              <CFormCheck
-                id="btncheck2"
-                :button="{ color: 'primary', variant: 'outline' }"
-                autocomplete="off"
-                label="Checkbox 2"
-              />
-              <CFormCheck
-                id="btncheck3"
-                :button="{ color: 'primary', variant: 'outline' }"
-                autocomplete="off"
-                label="Checkbox 3"
-              />
-            </CButtonGroup>
-          </DocsExample>
-          <DocsExample
-            href="components/button-group.html#checkbox-and-radio-button-groups"
+              Lainya
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo = true
+                    }
+                  "
+                >
+                  Ubah
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+              </li>
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo2 = true
+                    }
+                  "
+                >
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td>20/07/2025</td>
+        <td>Mobil</td>
+        <td>Rp. 20.000.000,00</td>
+        <td><del>Rp. 18.000.000,00</del></td>
+        <td><del>Rp. 15.000.000,00</del></td>
+        <td><del>Rp. 12.000.000,00</del></td>
+        <td class="d-flex gap-2">
+          <a
+            href="#"
+            :class="{ 'text-decoration-none': true }"
+            @click.prevent="
+              () => {
+                visibleLiveDemo = true
+              }
+            "
+            class="text-primary"
           >
-            <CButtonGroup
-              role="group"
-              aria-label="Basic checkbox toggle button group"
+            Lihat
+          </a>
+          <!-- Default dropend button -->
+          <div class="btn-group dropend">
+            <a
+              href="#"
+              class="dropdown-toggle text-decoration-none"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              <CFormCheck
-                id="btnradio1"
-                type="radio"
-                :button="{ color: 'primary', variant: 'outline' }"
-                name="btnradio"
-                autocomplete="off"
-                label="Radio 1"
-              />
-              <CFormCheck
-                id="btnradio2"
-                type="radio"
-                :button="{ color: 'primary', variant: 'outline' }"
-                name="btnradio"
-                autocomplete="off"
-                label="Radio 2"
-              />
-              <CFormCheck
-                id="btnradio3"
-                type="radio"
-                :button="{ color: 'primary', variant: 'outline' }"
-                name="btnradio"
-                autocomplete="off"
-                label="Radio 3"
-              />
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Button toolbar</span>
-        </CCardHeader>
-        <CCardBody>
-          <p>
-            Join sets of button groups into button toolbars for more complicated
-            components. Use utility classes as needed to space out groups,
-            buttons, and more.
-          </p>
-          <DocsExample href="components/button-group.html#button-toolbar">
-            <CButtonToolbar
-              role="group"
-              aria-label="Toolbar with button groups"
-            >
-              <CButtonGroup class="me-2" role="group" aria-label="First group">
-                <CButton color="primary">1</CButton>
-                <CButton color="primary">2</CButton>
-                <CButton color="primary">3</CButton>
-                <CButton color="primary">4</CButton>
-              </CButtonGroup>
-              <CButtonGroup class="me-2" role="group" aria-label="Second group">
-                <CButton color="secondary">5</CButton>
-                <CButton color="secondary">6</CButton>
-                <CButton color="secondary">7</CButton>
-              </CButtonGroup>
-              <CButtonGroup class="me-2" role="group" aria-label="Third group">
-                <CButton color="info">8</CButton>
-              </CButtonGroup>
-            </CButtonToolbar>
-          </DocsExample>
-          <p>
-            Feel free to combine input groups with button groups in your
-            toolbars. Similar to the example above, you’ll likely need some
-            utilities through to space items correctly.
-          </p>
-          <DocsExample href="components/button-group.html#button-toolbar">
-            <CButtonToolbar
-              class="mb-3"
-              role="group"
-              aria-label="Toolbar with button groups"
-            >
-              <CButtonGroup class="me-2" role="group" aria-label="First group">
-                <CButton color="secondary" variant="outline"> 1 </CButton>
-                <CButton color="secondary" variant="outline"> 2 </CButton>
-                <CButton color="secondary" variant="outline"> 3 </CButton>
-                <CButton color="secondary" variant="outline"> 4 </CButton>
-              </CButtonGroup>
-              <CInputGroup>
-                <CInputGroupText>@</CInputGroupText>
-                <CFormInput
-                  placeholder="Input group example"
-                  aria-label="Input group example"
-                  aria-describedby="btnGroupAddon"
-                />
-              </CInputGroup>
-            </CButtonToolbar>
-            <CButtonToolbar
-              class="justify-content-between"
-              role="group"
-              aria-label="Toolbar with button groups"
-            >
-              <CButtonGroup class="me-2" role="group" aria-label="First group">
-                <CButton color="secondary" variant="outline"> 1 </CButton>
-                <CButton color="secondary" variant="outline"> 2 </CButton>
-                <CButton color="secondary" variant="outline"> 3 </CButton>
-                <CButton color="secondary" variant="outline"> 4 </CButton>
-              </CButtonGroup>
-              <CInputGroup>
-                <CInputGroupText>@</CInputGroupText>
-                <CFormInput
-                  placeholder="Input group example"
-                  aria-label="Input group example"
-                  aria-describedby="btnGroupAddon"
-                />
-              </CInputGroup>
-            </CButtonToolbar>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Sizing</span>
-        </CCardHeader>
-        <CCardBody>
-          <p>
-            Alternatively, of implementing button sizing classes to each button
-            in a group, set
-            <code>size</code> property to all
-            <code>&lt;CButtonGroup&gt;</code>&#39;s, including each one when
-            nesting multiple groups.
-          </p>
-          <DocsExample href="components/button-group.html#sizing">
-            <CButtonGroup
-              size="lg"
-              role="group"
-              aria-label="Large button group"
-            >
-              <CButton color="dark" variant="outline"> Left </CButton>
-              <CButton color="dark" variant="outline"> Middle </CButton>
-              <CButton color="dark" variant="outline"> Right </CButton>
-            </CButtonGroup>
-            <br />
-            <CButtonGroup role="group" aria-label="Default button group">
-              <CButton color="dark" variant="outline"> Left </CButton>
-              <CButton color="dark" variant="outline"> Middle </CButton>
-              <CButton color="dark" variant="outline"> Right </CButton>
-            </CButtonGroup>
-            <br />
-            <CButtonGroup
-              size="sm"
-              role="group"
-              aria-label="Small button group"
-            >
-              <CButton color="dark" variant="outline"> Left </CButton>
-              <CButton color="dark" variant="outline"> Middle </CButton>
-              <CButton color="dark" variant="outline"> Right </CButton>
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Nesting</span>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Put a <code>&lt;CButtonGroup&gt;</code> inside another
-            <code>&lt;CButtonGroup&gt;</code> when you need dropdown menus
-            combined with a series of buttons.
-          </p>
-          <DocsExample href="components/button-group.html#nesting">
-            <CButtonGroup
-              role="group"
-              aria-label="Button group with nested dropdown"
-            >
-              <CButton color="primary">1</CButton>
-              <CButton color="primary">2</CButton>
-              <CDropdown variant="btn-group">
-                <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Button Group</strong> <span>Vertical variation</span>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Create a set of buttons that appear vertically stacked rather than
-            horizontally.
-            <strong>Split button dropdowns are not supported here.</strong>
-          </p>
-          <DocsExample href="components/button-group.html/#vertical-variation">
-            <CButtonGroup
-              vertical
-              role="group"
-              aria-label="Vertical button group"
-            >
-              <CButton color="dark">Button</CButton>
-              <CButton color="dark">Button</CButton>
-              <CButton color="dark">Button</CButton>
-              <CButton color="dark">Button</CButton>
-              <CButton color="dark">Button</CButton>
-              <CButton color="dark">Button</CButton>
-              <CButton color="dark">Button</CButton>
-            </CButtonGroup>
-          </DocsExample>
-          <DocsExample href="components/button-group.html/#vertical-variation">
-            <CButtonGroup
-              vertical
-              role="group"
-              aria-label="Vertical button group"
-            >
-              <CButton color="primary">Button</CButton>
-              <CButton color="primary">Button</CButton>
-              <CDropdown variant="btn-group">
-                <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-              <CButton color="primary">Button</CButton>
-              <CButton color="primary">Button</CButton>
-              <CDropdown variant="btn-group">
-                <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-              <CDropdown variant="btn-group">
-                <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-              <CDropdown variant="btn-group">
-                <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-            </CButtonGroup>
-          </DocsExample>
-          <DocsExample href="components/button-group.html/#vertical-variation">
-            <CButtonGroup
-              vertical
-              role="group"
-              aria-label="Vertical button group"
-            >
-              <CFormCheck
-                id="vbtnradio1"
-                type="radio"
-                :button="{ color: 'danger', variant: 'outline' }"
-                name="vbtnradio"
-                autocomplete="off"
-                label="Radio
-              1"
-                checked
-              />
-              <CFormCheck
-                id="vbtnradio2"
-                type="radio"
-                :button="{ color: 'danger', variant: 'outline' }"
-                name="vbtnradio"
-                autocomplete="off"
-                label="Radio
-              2"
-              />
-              <CFormCheck
-                id="vbtnradio3"
-                type="radio"
-                :button="{ color: 'danger', variant: 'outline' }"
-                name="vbtnradio"
-                autocomplete="off"
-                label="Radio
-              3"
-              />
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-  </CRow>
+              Lainya
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo = true
+                    }
+                  "
+                >
+                  Ubah
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+              </li>
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo2 = true
+                    }
+                  "
+                >
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer-table d-flex justify-content-between">
+    <div>
+      <span>Menampilkan 1-2 dari 2 data</span>
+    </div>
+    <div>
+      <!-- Pagination -->
+      <CPagination align="end" aria-label="Page navigation example">
+        <CPaginationItem aria-label="Previous" href="#" disabled
+          ><span aria-hidden="true">&laquo;</span></CPaginationItem
+        >
+        <CPaginationItem href="#" active>1</CPaginationItem>
+        <CPaginationItem href="#">2</CPaginationItem>
+        <CPaginationItem href="#">3</CPaginationItem>
+        <CPaginationItem aria-label="Next" href="#"
+          ><span aria-hidden="true">&raquo;</span></CPaginationItem
+        >
+      </CPagination>
+    </div>
+  </div>
+  <!-- Modal -->
+  <CModal
+    :visible="visibleLiveDemo"
+    @close="
+      () => {
+        visibleLiveDemo = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah data</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="mb-3">
+        <CFormInput
+          type="date"
+          id="tanggal-masuk"
+          label="Tanggal masuk"
+          placeholder="Masukan tanggal masuk"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CFormSelect
+        class="mb-3"
+        id="exampleFormControlSelect1"
+        label="Pilih asset"
+        :options="[
+          { label: 'Pilih assets', value: '' },
+          { label: 'Motor', value: '1' },
+          { label: 'Mobil', value: '2' },
+          { label: 'Sepeda', value: '3' },
+        ]"
+      ></CFormSelect>
+      <CForm class="mb-3">
+        <CFormInput
+          type="text"
+          id="harga"
+          label="Harga"
+          placeholder="Rp. x.xxx.xxx,xx"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3" v-for="(item, index) in penyusutan" :key="index">
+        <CFormLabel :for="'penyusutan' + (index + 1)">
+          {{ item.label }}
+        </CFormLabel>
+        <CFormInput
+          type="text"
+          :id="'penyusutan' + (index + 1)"
+          v-model="item.value"
+          :placeholder="`Masukan ${item.label.toLowerCase()}`"
+          :aria-describedby="`penyusutanHelp${index}`"
+          readonly
+        />
+      </CForm>
+      <CFormTextarea
+        class="mb-3"
+        id="exampleFormControlTextarea1"
+        label="Keterangan"
+        placeholder="Deskripsi, alamat, dsb"
+        rows="3"
+      ></CFormTextarea>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="primary">Submit</CButton>
+    </CModalFooter>
+  </CModal>
+
+  <!-- Modal Hapus-->
+  <CModal
+    :visible="visibleLiveDemo2"
+    @close="
+      () => {
+        visibleLiveDemo2 = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Contoh peringatan hapus data</CModalTitle>
+    </CModalHeader>
+    <CModalBody>Apakah anda yakin ingin menghapus data ini?</CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo2 = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="danger">Hapus</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
+
+<style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

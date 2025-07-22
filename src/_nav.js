@@ -16,10 +16,22 @@ export default [
     icon: 'cil-pencil',
   },
   {
-    component: 'CNavItem',
+    component: 'CNavGroup',
     name: 'Operasional',
     to: '/operasional',
     icon: 'cil-drop',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Uang Masuk',
+        to: '/operasional/uang-masuk',
+      },
+      {
+        component: 'CNavItem',
+        name: 'Uang Keluar',
+        to: '/operasional/uang-keluar',
+      },
+    ],
   },
   {
     component: 'CNavTitle',

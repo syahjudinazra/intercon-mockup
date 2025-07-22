@@ -1,356 +1,313 @@
+<script setup>
+import { ref } from 'vue'
+const visibleLiveDemo = ref(false)
+const visibleLiveDemo2 = ref(false)
+const penyusutan = ref([
+  { label: 'Penyusutan ke-1', value: 'Rp. 18.000.000,00' },
+  { label: 'Penyusutan ke-2', value: 'Rp. 15.000.000,00' },
+  { label: 'Penyusutan ke-3', value: 'Rp. 12.000.000,00' },
+])
+</script>
 <template>
-  <CRow>
-    <CCol :xs="12">
-      <DocsComponents href="components/dropdown.html" />
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Single button</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Here&#39;s how you can put them to work with either
-            <code>&lt;button&gt;</code>
-            elements:
-          </p>
-          <DocsExample href="components/dropdown.html#single-button">
-            <CDropdown>
-              <CDropdownToggle color="secondary"
-                >Dropdown button</CDropdownToggle
-              >
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </DocsExample>
-          <p class="text-body-secondary small">
-            The best part is you can do this with any button variant, too:
-          </p>
-          <DocsExample href="components/dropdown.html#single-button">
-            <template
-              v-for="color in [
-                'primary',
-                'secondary',
-                'success',
-                'danger',
-                'warning',
-                'info',
-                'light',
-                'dark',
-              ]"
-              :key="color"
+  <h2>Penyusutan</h2>
+  <div class="d-flex justify-content-between gap-2 mb-3">
+    <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
+    <div class="utility-table d-flex gap-2">
+      <CButton color="danger">PDF</CButton>
+      <CDropdown variant="btn-group">
+        <CDropdownToggle color="success">Excel</CDropdownToggle>
+        <CDropdownMenu>
+          <CDropdownItem href="#">Export data</CDropdownItem>
+          <CDropdownItem href="#">Import data</CDropdownItem>
+        </CDropdownMenu>
+      </CDropdown>
+      <CInputGroup>
+        <CFormInput placeholder="Cari..." aria-label="Cari..." aria-describedby="button-addon2" />
+        <CButton type="button" color="secondary" variant="outline" id="button-addon2"
+          >Search</CButton
+        >
+      </CInputGroup>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Tanggal Masuk</th>
+        <th scope="col">Nama Asset</th>
+        <th scope="col">Harga</th>
+        <th scope="col">Penyusutan ke-1</th>
+        <th scope="col">Penyusutan ke-2</th>
+        <th scope="col">Penyusutan ke-3</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>18/07/2025</td>
+        <td>Motor</td>
+        <td>Rp. 20.000.000,00</td>
+        <td><del>Rp. 18.000.000,00</del></td>
+        <td><del>Rp. 15.000.000,00</del></td>
+        <td><del>Rp. 12.000.000,00</del></td>
+        <td class="d-flex gap-2">
+          <a
+            href="#"
+            :class="{ 'text-decoration-none': true }"
+            @click.prevent="
+              () => {
+                visibleLiveDemo = true
+              }
+            "
+            class="text-primary"
+          >
+            Lihat
+          </a>
+          <!-- Default dropend button -->
+          <div class="btn-group dropend">
+            <a
+              href="#"
+              class="dropdown-toggle text-decoration-none"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-              <CDropdown variant="btn-group">
-                <CDropdownToggle :color="color">{{ color }}</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-            </template>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Split button</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Similarly, create split button dropdowns with virtually the same
-            markup as single button dropdowns, but with the addition of boolean
-            prop <code>split</code> for proper spacing around the dropdown
-            caret.
-          </p>
-          <p class="text-body-secondary small">
-            We use this extra class to reduce the horizontal
-            <code>padding</code> on either side of the caret by 25% and remove
-            the <code>margin-left</code> that&#39;s attached for normal button
-            dropdowns. Those additional changes hold the caret centered in the
-            split button and implement a more properly sized hit area next to
-            the main button.
-          </p>
-          <DocsExample href="components/dropdown.html#split-button">
-            <template
-              v-for="color in [
-                'primary',
-                'secondary',
-                'success',
-                'danger',
-                'warning',
-                'info',
-                'light',
-                'dark',
-              ]"
-              :key="color"
-            >
-              <CDropdown variant="btn-group">
-                <CButton :color="color">{{ color }}</CButton>
-                <CDropdownToggle :color="color" split>{{
-                  color
-                }}</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-            </template>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Sizing</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Button dropdowns work with buttons of all sizes, including default
-            and split dropdown buttons.
-          </p>
-          <DocsExample href="components/dropdown.html#sizing">
-            <CDropdown variant="btn-group">
-              <CDropdownToggle color="secondary" size="lg">
-                Large button
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-            <CDropdown variant="btn-group">
-              <CButton color="secondary" size="lg">
-                Large split button
-              </CButton>
-              <CDropdownToggle color="secondary" size="lg" split />
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </DocsExample>
-          <DocsExample href="components/dropdown.html#sizing">
-            <CDropdown variant="btn-group">
-              <CDropdownToggle color="secondary" size="sm">
-                Small button
-              </CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-            <CDropdown variant="btn-group">
-              <CButton color="secondary" size="sm">
-                Small split button
-              </CButton>
-              <CDropdownToggle color="secondary" size="sm" split />
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Single button</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Opt into darker dropdowns to match a dark navbar or custom style by
-            set
-            <code>dark</code> property. No changes are required to the dropdown
-            items.
-          </p>
-          <DocsExample href="components/dropdown.html#dark-dropdowns">
-            <CDropdown dark>
-              <CDropdownToggle color="secondary"
-                >Dropdown button</CDropdownToggle
-              >
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </DocsExample>
-          <p class="text-body-secondary small">
-            And putting it to use in a navbar:
-          </p>
-          <DocsExample href="components/dropdown.html#dark-dropdowns">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="https://coreui.io/vue/">
-                  Navbar
+              Lainya
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo = true
+                    }
+                  "
+                >
+                  Ubah
                 </a>
-                <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-coreui-toggle="collapse"
-                  data-coreui-target="#navbarNavDarkDropdown"
-                  aria-controls="navbarNavDarkDropdown"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
+              </li>
+              <li class="dropdown-item">
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+              </li>
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo2 = true
+                    }
+                  "
                 >
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div
-                  id="navbarNavDarkDropdown"
-                  class="collapse navbar-collapse"
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td>20/07/2025</td>
+        <td>Mobil</td>
+        <td>Rp. 20.000.000,00</td>
+        <td><del>Rp. 18.000.000,00</del></td>
+        <td><del>Rp. 15.000.000,00</del></td>
+        <td><del>Rp. 12.000.000,00</del></td>
+        <td class="d-flex gap-2">
+          <a
+            href="#"
+            :class="{ 'text-decoration-none': true }"
+            @click.prevent="
+              () => {
+                visibleLiveDemo = true
+              }
+            "
+            class="text-primary"
+          >
+            Lihat
+          </a>
+          <!-- Default dropend button -->
+          <div class="btn-group dropend">
+            <a
+              href="#"
+              class="dropdown-toggle text-decoration-none"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Lainya
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo = true
+                    }
+                  "
                 >
-                  <ul class="navbar-nav">
-                    <CDropdown dark as="li" variant="nav-item">
-                      <CDropdownToggle>Dropdown</CDropdownToggle>
-                      <CDropdownMenu>
-                        <CDropdownItem href="#">Action</CDropdownItem>
-                        <CDropdownItem href="#">Another action</CDropdownItem>
-                        <CDropdownItem href="#"
-                          >Something else here</CDropdownItem
-                        >
-                        <CDropdownDivider />
-                        <CDropdownItem href="#">Separated link</CDropdownItem>
-                      </CDropdownMenu>
-                    </CDropdown>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Dropup</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Trigger dropdown menus above elements by adding
-            <code>direction=&#34;dropup&#34;</code> to the
-            <code>&lt;CDropdown&gt;</code>
-            component.
-          </p>
-          <DocsExample href="components/dropdown.html#dropup">
-            <CDropdown variant="btn-group" direction="dropup">
-              <CDropdownToggle color="secondary">Dropdown</CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-            <CDropdown variant="btn-group" direction="dropup">
-              <CButton color="secondary">Small split button</CButton>
-              <CDropdownToggle color="secondary" split />
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Dropright</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Trigger dropdown menus at the right of the elements by adding
-            <code>direction=&#34;dropend&#34;</code> to the
-            <code>&lt;CDropdown&gt;</code>
-            component.
-          </p>
-          <DocsExample href="components/dropdown.html#dropright">
-            <CDropdown variant="btn-group" direction="dropend">
-              <CDropdownToggle color="secondary">Dropdown</CDropdownToggle>
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-            <CDropdown variant="btn-group" direction="dropend">
-              <CButton color="secondary">Small split button</CButton>
-              <CDropdownToggle color="secondary" split />
-              <CDropdownMenu>
-                <CDropdownItem href="#">Action</CDropdownItem>
-                <CDropdownItem href="#">Another action</CDropdownItem>
-                <CDropdownItem href="#">Something else here</CDropdownItem>
-                <CDropdownDivider />
-                <CDropdownItem href="#">Separated link</CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-    <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Dropdown</strong> <small>Dropleft</small>
-        </CCardHeader>
-        <CCardBody>
-          <p class="text-body-secondary small">
-            Trigger dropdown menus at the left of the elements by adding
-            <code>direction=&#34;dropstart&#34;</code> to the
-            <code>&lt;CDropdown&gt;</code>
-            component.
-          </p>
-          <DocsExample href="components/dropdown.html#dropleft">
-            <CButtonGroup>
-              <CDropdown variant="btn-group" direction="dropstart">
-                <CDropdownToggle color="secondary" split />
-                <CDropdownMenu>
-                  <CDropdownItem href="#">Action</CDropdownItem>
-                  <CDropdownItem href="#">Another action</CDropdownItem>
-                  <CDropdownItem href="#">Something else here</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="#">Separated link</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-              <CButton color="secondary">Small split button</CButton>
-            </CButtonGroup>
-          </DocsExample>
-        </CCardBody>
-      </CCard>
-    </CCol>
-  </CRow>
+                  Ubah
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+              </li>
+              <li class="dropdown-item">
+                <a
+                  href="#"
+                  :class="{ 'text-decoration-none': true }"
+                  @click.prevent="
+                    () => {
+                      visibleLiveDemo2 = true
+                    }
+                  "
+                >
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer-table d-flex justify-content-between">
+    <div>
+      <span>Menampilkan 1-2 dari 2 data</span>
+    </div>
+    <div>
+      <!-- Pagination -->
+      <CPagination align="end" aria-label="Page navigation example">
+        <CPaginationItem aria-label="Previous" href="#" disabled
+          ><span aria-hidden="true">&laquo;</span></CPaginationItem
+        >
+        <CPaginationItem href="#" active>1</CPaginationItem>
+        <CPaginationItem href="#">2</CPaginationItem>
+        <CPaginationItem href="#">3</CPaginationItem>
+        <CPaginationItem aria-label="Next" href="#"
+          ><span aria-hidden="true">&raquo;</span></CPaginationItem
+        >
+      </CPagination>
+    </div>
+  </div>
+  <!-- Modal -->
+  <CModal
+    :visible="visibleLiveDemo"
+    @close="
+      () => {
+        visibleLiveDemo = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah data</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm class="mb-3">
+        <CFormInput
+          type="date"
+          id="tanggal-masuk"
+          label="Tanggal masuk"
+          placeholder="Masukan tanggal masuk"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CFormSelect
+        class="mb-3"
+        id="exampleFormControlSelect1"
+        label="Pilih asset"
+        :options="[
+          { label: 'Pilih assets', value: '' },
+          { label: 'Motor', value: '1' },
+          { label: 'Mobil', value: '2' },
+          { label: 'Sepeda', value: '3' },
+        ]"
+      ></CFormSelect>
+      <CForm class="mb-3">
+        <CFormInput
+          type="text"
+          id="harga"
+          label="Harga"
+          placeholder="Rp. x.xxx.xxx,xx"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3" v-for="(item, index) in penyusutan" :key="index">
+        <CFormLabel :for="'penyusutan' + (index + 1)">
+          {{ item.label }}
+        </CFormLabel>
+        <CFormInput
+          type="text"
+          :id="'penyusutan' + (index + 1)"
+          v-model="item.value"
+          :placeholder="`Masukan ${item.label.toLowerCase()}`"
+          :aria-describedby="`penyusutanHelp${index}`"
+          readonly
+        />
+      </CForm>
+      <CFormTextarea
+        class="mb-3"
+        id="exampleFormControlTextarea1"
+        label="Keterangan"
+        placeholder="Deskripsi, alamat, dsb"
+        rows="3"
+      ></CFormTextarea>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="primary">Submit</CButton>
+    </CModalFooter>
+  </CModal>
+
+  <!-- Modal Hapus-->
+  <CModal
+    :visible="visibleLiveDemo2"
+    @close="
+      () => {
+        visibleLiveDemo2 = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Contoh peringatan hapus data</CModalTitle>
+    </CModalHeader>
+    <CModalBody>Apakah anda yakin ingin menghapus data ini?</CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo2 = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="danger">Hapus</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
+
+<style scoped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>
