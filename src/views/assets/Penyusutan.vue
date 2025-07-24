@@ -109,7 +109,7 @@ const penyusutan = ref([
         </td>
       </tr>
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">2</th>
         <td>20/07/2025</td>
         <td>Mobil</td>
         <td>Rp. 20.000.000,00</td>

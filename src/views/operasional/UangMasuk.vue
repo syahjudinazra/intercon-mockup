@@ -40,7 +40,7 @@ const visibleLiveDemo2 = ref(false)
         <th scope="row">1</th>
         <td>18/07/2025</td>
         <td>Iuran warga</td>
-        <td>Rp. 250.000,00</td>
+        <td>Rp. 150.000,00</td>
         <td>Saya telah membayar iuran bulan Juli 2025, dan sudah melampirkan bukti pembayaran.</td>
         <td class="d-flex gap-2">
           <a

@@ -4,9 +4,7 @@ import { useColorModes } from '@coreui/vue'
 
 import { useThemeStore } from '@/stores/theme.js'
 
-const { isColorModeSet, setColorMode } = useColorModes(
-  'coreui-free-vue-admin-template-theme',
-)
+const { isColorModeSet, setColorMode } = useColorModes('coreui-free-vue-admin-template-theme')
 const currentTheme = useThemeStore()
 
 onBeforeMount(() => {
@@ -31,12 +29,12 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <router-view />
+  <div class="px-4">
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
-// Import Main styles for this application
 @use 'styles/style';
-// We use those styles to show code examples, you should remove them in your application.
 @use 'styles/examples';
 </style>
