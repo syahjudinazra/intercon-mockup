@@ -39,9 +39,9 @@ const visibleLiveDemo2 = ref(false)
       <tr>
         <th scope="row">1</th>
         <td>18/07/2025</td>
-        <td>Iuran warga</td>
-        <td>Rp. 250.000,00</td>
-        <td>Saya telah membayar iuran bulan Juli 2025, dan sudah melampirkan bukti pembayaran.</td>
+        <td>Bangunan Cluster C</td>
+        <td>Rp. 550.000,00</td>
+        <td>Telah melakukan renovasi kanopi bagian depan rumah di Cluster C blok 70</td>
         <td class="d-flex gap-2">
           <a
             href="#"
@@ -102,12 +102,9 @@ const visibleLiveDemo2 = ref(false)
       <tr>
         <th scope="row">2</th>
         <td>11/07/2025</td>
-        <td>Iuran lingkungan</td>
-        <td>Rp. 500.000,00</td>
-        <td>
-          Saya telah membayar iuran lingkungan bulan Juli 2025, dan sudah melampirkan bukti
-          pembayaran.
-        </td>
+        <td>Bangunan Cluster Angsa</td>
+        <td>Rp. 150.000,00</td>
+        <td>Telah melakukan renovasi halaman bagian depan rumah di Cluster Angsa blok 30</td>
         <td class="d-flex gap-2">
           <a
             href="#"

@@ -34,6 +34,7 @@ const penyusutan = ref([
       <tr>
         <th scope="col">No</th>
         <th scope="col">Tanggal</th>
+        <th scope="col">User</th>
         <th scope="col">Komplain saya</th>
         <th scope="col">Keterangan</th>
         <th scope="col">Status</th>
@@ -44,6 +45,7 @@ const penyusutan = ref([
       <tr>
         <th scope="row">1</th>
         <td>18/07/2025</td>
+        <td>Cika</td>
         <td>Pohon tumbang</td>
         <td>Mohon dibersihkan dari jalan</td>
         <td><span class="badge bg-secondary text-white">Antrian</span></td>
@@ -107,6 +109,7 @@ const penyusutan = ref([
       <tr>
         <th scope="row">2</th>
         <td>21/07/2025</td>
+        <td>Mulia</td>
         <td>Jalanan rusak</td>
         <td>Mohon diperbaiki jalananya</td>
         <td><span class="badge bg-primary text-white">Diproses</span></td>
@@ -211,7 +214,7 @@ const penyusutan = ref([
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
-            <CForm class="mb-3">
+      <CForm class="mb-3">
         <CFormInput
           type="text"
           id="komplain"
@@ -220,7 +223,7 @@ const penyusutan = ref([
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
-            <CFormTextarea
+      <CFormTextarea
         class="mb-3"
         id="exampleFormControlTextarea1"
         label="Keterangan"
@@ -238,8 +241,13 @@ const penyusutan = ref([
           { label: 'Selesai', value: '3' },
         ]"
       ></CFormSelect>
-        <CFormInput type="file" class="mb-3" id="formFile" label="Upload bukti komplain" />
-        <CFormInput type="file" class="mb-3" id="formFile" label="Upload bukti komplain selesai ditangani (petugas)" />
+      <CFormInput type="file" class="mb-3" id="formFile" label="Upload bukti komplain" />
+      <CFormInput
+        type="file"
+        class="mb-3"
+        id="formFile"
+        label="Upload bukti komplain selesai ditangani (petugas)"
+      />
     </CModalBody>
     <CModalFooter>
       <CButton

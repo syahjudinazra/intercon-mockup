@@ -59,8 +59,8 @@
               <input v-model="form.email" class="form-control" />
             </div>
             <div class="mb-3">
-              <label class="form-label">Password</label>
-              <input v-model="form.password" class="form-control" type="password" />
+              <label class="form-label">Role</label>
+              <input v-model="form.role" class="form-control" type="text" />
             </div>
           </div>
           <div class="modal-footer">
@@ -129,16 +129,17 @@ const selectedUser = ref(null)
 const form = ref({
   name: '',
   email: '',
-  password: '',
+  role: '',
 })
 
 const users = ref([
-  { id: 1, name: 'Alice', email: 'alice@example.com', role: 'Admin' },
-  { id: 2, name: 'Bob', email: 'bob@example.com', role: 'Editor' },
-  { id: 3, name: 'Charlie', email: 'charlie@example.com', role: 'Viewer' },
+  { id: 1, name: 'Alice', email: 'alice@example.com', role: 'Superadmin' },
+  { id: 2, name: 'Bob', email: 'bob@example.com', role: 'Admin' },
+  { id: 3, name: 'Charlie', email: 'charlie@example.com', role: 'Petugas' },
+  { id: 4, name: 'David', email: 'david@example.com', role: 'Penghuni' },
 ])
 
-const roles = ['Admin', 'Editor', 'Viewer']
+const roles = ['Superadmin', 'Admin', 'Petugas', 'Penghuni']
 const permissions = ['Create', 'Edit', 'Delete', 'View']
 
 const selectedRole = ref('')
@@ -150,7 +151,7 @@ const filteredUsers = computed(() =>
 
 function openUserForm(user = null) {
   selectedUser.value = user
-  form.value = user ? { ...user, password: '' } : { name: '', email: '', password: '' }
+  form.value = user ? { ...user, role: '' } : { name: '', email: '', role: '' }
   showUserForm.value = true
 }
 
