@@ -101,17 +101,6 @@
                 <label class="form-label small text-muted">Sampai Tanggal</label>
                 <input type="date" class="form-control" v-model="dateRange.end" />
               </div>
-              <div class="col-md-2 d-flex align-items-end">
-                <button
-                  class="btn btn-outline-danger w-100"
-                  type="button"
-                  @click="clearDateFilter"
-                  v-if="dateRange.start || dateRange.end"
-                  title="Hapus Filter Tanggal"
-                >
-                  <i class="bi bi-x-lg"></i>
-                </button>
-              </div>
             </div>
           </div>
 
@@ -171,7 +160,7 @@
               </span>
 
               <button class="btn btn-outline-secondary btn-sm" @click="clearAllFilters">
-                Hapus Semua Filter
+                Hapus Filter
               </button>
             </div>
           </div>
