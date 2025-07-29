@@ -21,6 +21,11 @@ const routes = [
         component: () => import('@/views/Proyek.vue'),
       },
       {
+        path: '/biaya-lainnya',
+        name: 'Biaya Lainnya',
+        component: () => import('@/views/BiayaLainnya.vue'),
+      },
+      {
         path: '/operasional',
         name: 'Operasional',
         component: {
@@ -67,6 +72,11 @@ const routes = [
             name: 'Bangunan Renovasi',
             component: () => import('@/views/bangunan/BangunanRenovasi.vue'),
           },
+          {
+            path: '/bangunan/lain-lain',
+            name: 'Lain Lain',
+            component: () => import('@/views/bangunan/LainLain.vue'),
+          },
         ],
       },
       {
@@ -83,11 +93,6 @@ const routes = [
             path: '/assets/estimasi',
             name: 'Estimasi',
             component: () => import('@/views/assets/Estimasi.vue'),
-          },
-          {
-            path: '/assets/penyusutan',
-            name: 'Penyusutan',
-            component: () => import('@/views/assets/Penyusutan.vue'),
           },
           {
             path: '/assets/jual-asset',

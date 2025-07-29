@@ -2,14 +2,9 @@
 import { ref } from 'vue'
 const visibleLiveDemo = ref(false)
 const visibleLiveDemo2 = ref(false)
-const penyusutan = ref([
-  { label: 'Penyusutan ke-1', value: 'Rp. 18.000.000,00' },
-  { label: 'Penyusutan ke-2', value: 'Rp. 15.000.000,00' },
-  { label: 'Penyusutan ke-3', value: 'Rp. 12.000.000,00' },
-])
 </script>
 <template>
-  <h2>Penyusutan</h2>
+  <h2>Lain Lain</h2>
   <div class="d-flex justify-content-between gap-2 mb-3">
     <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
     <div class="utility-table d-flex gap-2">
@@ -34,11 +29,9 @@ const penyusutan = ref([
       <tr>
         <th scope="col">No</th>
         <th scope="col">Tanggal Masuk</th>
-        <th scope="col">Nama Asset</th>
-        <th scope="col">Harga</th>
-        <th scope="col">Penyusutan ke-1</th>
-        <th scope="col">Penyusutan ke-2</th>
-        <th scope="col">Penyusutan ke-3</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Nominal</th>
+        <th scope="col">Keterangan</th>
         <th scope="col">Aksi</th>
       </tr>
     </thead>
@@ -46,11 +39,9 @@ const penyusutan = ref([
       <tr>
         <th scope="row">1</th>
         <td>18/07/2025</td>
-        <td>Motor</td>
-        <td>Rp. 20.000.000,00</td>
-        <td><del>Rp. 18.000.000,00</del></td>
-        <td><del>Rp. 15.000.000,00</del></td>
-        <td><del>Rp. 12.000.000,00</del></td>
+        <td>Bangunan Cluster C</td>
+        <td>Rp. 550.000,00</td>
+        <td>Telah melakukan renovasi kanopi bagian depan rumah di Cluster C blok 70</td>
         <td class="d-flex gap-2">
           <a
             href="#"
@@ -110,12 +101,10 @@ const penyusutan = ref([
       </tr>
       <tr>
         <th scope="row">2</th>
-        <td>20/07/2025</td>
-        <td>Mobil</td>
-        <td>Rp. 20.000.000,00</td>
-        <td><del>Rp. 18.000.000,00</del></td>
-        <td><del>Rp. 15.000.000,00</del></td>
-        <td><del>Rp. 12.000.000,00</del></td>
+        <td>11/07/2025</td>
+        <td>Bangunan Cluster Angsa</td>
+        <td>Rp. 150.000,00</td>
+        <td>Telah melakukan renovasi halaman bagian depan rumah di Cluster Angsa blok 30</td>
         <td class="d-flex gap-2">
           <a
             href="#"
@@ -205,7 +194,7 @@ const penyusutan = ref([
     aria-labelledby="LiveDemoExampleLabel"
   >
     <CModalHeader>
-      <CModalTitle id="LiveDemoExampleLabel">Tambah data</CModalTitle>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah Proyek</CModalTitle>
     </CModalHeader>
     <CModalBody>
       <CForm class="mb-3">
@@ -220,34 +209,21 @@ const penyusutan = ref([
       <CFormSelect
         class="mb-3"
         id="exampleFormControlSelect1"
-        label="Pilih asset"
+        label="Pilih kategori"
         :options="[
-          { label: 'Pilih assets', value: '' },
-          { label: 'Motor', value: '1' },
-          { label: 'Mobil', value: '2' },
-          { label: 'Sepeda', value: '3' },
+          { label: 'Pilihan', value: '' },
+          { label: 'Iuran warga', value: '1' },
+          { label: 'Iuran lingkungan', value: '2' },
+          { label: 'Iuran keamanan', value: '3' },
         ]"
       ></CFormSelect>
       <CForm class="mb-3">
         <CFormInput
-          type="text"
-          id="harga"
-          label="Harga"
-          placeholder="Rp. x.xxx.xxx,xx"
+          type="number"
+          id="nominal"
+          label="Nominal"
+          placeholder="Masukan nominal"
           aria-describedby="exampleFormControlInputHelpInline"
-        />
-      </CForm>
-      <CForm class="mb-3" v-for="(item, index) in penyusutan" :key="index">
-        <CFormLabel :for="'penyusutan' + (index + 1)">
-          {{ item.label }}
-        </CFormLabel>
-        <CFormInput
-          type="text"
-          :id="'penyusutan' + (index + 1)"
-          v-model="item.value"
-          :placeholder="`Masukan ${item.label.toLowerCase()}`"
-          :aria-describedby="`penyusutanHelp${index}`"
-          readonly
         />
       </CForm>
       <CFormTextarea
@@ -257,6 +233,7 @@ const penyusutan = ref([
         placeholder="Deskripsi, alamat, dsb"
         rows="3"
       ></CFormTextarea>
+      <CFormInput type="file" id="formFile" label="Upload bukti pembayaran bangunan renovasi" />
     </CModalBody>
     <CModalFooter>
       <CButton
