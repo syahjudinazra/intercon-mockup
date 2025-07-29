@@ -1,7 +1,7 @@
 import { h, resolveComponent } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import DefaultLayout from '@/layouts/DefaultLayout'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const routes = [
   {
@@ -11,118 +11,115 @@ const routes = [
     redirect: '/dashboard',
     children: [
       {
-        path: '/dashboard',
+        path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/Dashboard.vue'),
       },
       {
-        path: '/proyek',
-        name: 'Proyek',
-        component: () => import('@/views/Proyek.vue'),
+        path: 'uang-masuk',
+        name: 'Uang Masuk',
+        redirect: '/uang-masuk/proyek',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        children: [
+          {
+            path: 'proyek',
+            name: 'Proyek',
+            component: () => import('@/views/uang-masuk/Proyek.vue'),
+          },
+          {
+            path: 'bangunan',
+            name: 'Bangunan',
+            redirect: '/uang-masuk/bangunan/bangunan-baru',
+            component: {
+              render() {
+                return h(resolveComponent('router-view'))
+              },
+            },
+            children: [
+              {
+                path: 'bangunan-baru',
+                name: 'Bangunan Baru',
+                component: () => import('@/views/uang-masuk/bangunan/BangunanBaru.vue'),
+              },
+              {
+                path: 'bangunan-renovasi',
+                name: 'Bangunan Renovasi',
+                component: () => import('@/views/uang-masuk/bangunan/BangunanRenovasi.vue'),
+              },
+              {
+                path: 'lain-lain',
+                name: 'Lain Lain',
+                component: () => import('@/views/uang-masuk/bangunan/LainLain.vue'),
+              },
+            ],
+          },
+          {
+            path: 'assets',
+            name: 'Assets',
+            redirect: '/uang-masuk/assets/estimasi',
+            component: {
+              render() {
+                return h(resolveComponent('router-view'))
+              },
+            },
+            children: [
+              {
+                path: 'estimasi',
+                name: 'Estimasi',
+                component: () => import('@/views/uang-masuk/assets/Estimasi.vue'),
+              },
+              {
+                path: 'jual-asset',
+                name: 'Jual Asset',
+                component: () => import('@/views/uang-masuk/assets/JualAsset.vue'),
+              },
+              {
+                path: 'jual-kartu',
+                name: 'Jual Kartu',
+                component: () => import('@/views/uang-masuk/assets/JualKartu.vue'),
+              },
+            ],
+          },
+        ],
       },
       {
-        path: '/biaya-lainnya',
+        path: 'uang-keluar',
+        name: 'Uang Keluar',
+        redirect: '/uang-keluar/deposito',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        children: [
+          {
+            path: 'deposito',
+            name: 'Deposito',
+            component: () => import('@/views/uang-keluar/Deposito.vue'),
+          },
+        ],
+      },
+      {
+        path: 'biaya-lainnya',
         name: 'Biaya Lainnya',
         component: () => import('@/views/BiayaLainnya.vue'),
       },
       {
-        path: '/operasional',
-        name: 'Operasional',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/operasional/uang-masuk',
-        children: [
-          {
-            path: '/operasional/uang-masuk',
-            name: 'Uang Masuk',
-            component: () => import('@/views/operasional/UangMasuk.vue'),
-          },
-          {
-            path: '/operasional/uang-keluar',
-            name: 'Uang Keluar',
-            component: () => import('@/views/operasional/UangKeluar.vue'),
-          },
-        ],
-      },
-      {
-        path: '/proyek',
-        name: 'Proyek',
-        component: () => import('@/views/Proyek.vue'),
-      },
-      {
-        path: '/bangunan',
-        name: 'Bangunan',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/bangunan/bangunan-baru',
-        children: [
-          {
-            path: '/bangunan/bangunan-baru',
-            name: 'Bangunan Baru',
-            component: () => import('@/views/bangunan/BangunanBaru.vue'),
-          },
-          {
-            path: '/bangunan/bangunan-renovasi',
-            name: 'Bangunan Renovasi',
-            component: () => import('@/views/bangunan/BangunanRenovasi.vue'),
-          },
-          {
-            path: '/bangunan/lain-lain',
-            name: 'Lain Lain',
-            component: () => import('@/views/bangunan/LainLain.vue'),
-          },
-        ],
-      },
-      {
-        path: '/assets',
-        name: 'Assets',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/assets/estimasi',
-        children: [
-          {
-            path: '/assets/estimasi',
-            name: 'Estimasi',
-            component: () => import('@/views/assets/Estimasi.vue'),
-          },
-          {
-            path: '/assets/jual-asset',
-            name: 'Jual Asset',
-            component: () => import('@/views/assets/JualAsset.vue'),
-          },
-          {
-            path: '/assets/jual-kartu',
-            name: 'Jual Kartu',
-            component: () => import('@/views/assets/JualKartu.vue'),
-          },
-        ],
-      },
-      {
-        path: '/komplain',
+        path: 'komplain',
         name: 'Komplain',
         component: () => import('@/views/Komplain.vue'),
       },
       {
-        path: '/deposito',
-        name: 'Deposito',
-        component: () => import('@/views/Deposito.vue'),
-      },
-      {
-        path: '/kelola-users',
+        path: 'kelola-users',
         name: 'Kelola Users',
         component: () => import('@/views/users/KelolaUsers.vue'),
       },
       {
-        path: '/semua-aktivitas',
+        path: 'semua-aktivitas',
         name: 'Semua Aktivitas',
         component: () => import('@/views/SemuaAktivitas.vue'),
       },
@@ -141,22 +138,22 @@ const routes = [
       {
         path: '404',
         name: 'Page404',
-        component: () => import('@/views/pages/Page404'),
+        component: () => import('@/views/pages/Page404.vue'),
       },
       {
         path: '500',
         name: 'Page500',
-        component: () => import('@/views/pages/Page500'),
+        component: () => import('@/views/pages/Page500.vue'),
       },
       {
         path: 'login',
         name: 'Login',
-        component: () => import('@/views/pages/Login'),
+        component: () => import('@/views/pages/Login.vue'),
       },
       {
         path: 'register',
         name: 'Register',
-        component: () => import('@/views/pages/Register'),
+        component: () => import('@/views/pages/Register.vue'),
       },
     ],
   },
@@ -166,7 +163,6 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior() {
-    // always scroll to top
     return { top: 0 }
   },
 })

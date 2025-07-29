@@ -18,54 +18,54 @@ export default [
       {
         component: 'CNavItem',
         name: 'Proyek',
-        to: '/proyek',
+        to: '/uang-masuk/proyek',
         icon: 'cil-pencil',
       },
       {
         component: 'CNavGroup',
         name: 'Bangunan',
-        to: '/manajemen/karyawan',
+        to: '/uang-masuk/bangunan',
         icon: 'cil-puzzle',
 
         items: [
           {
             component: 'CNavItem',
             name: 'Bangunan Baru',
-            to: '/bangunan/bangunan-baru',
+            to: '/uang-masuk/bangunan/bangunan-baru',
           },
           {
             component: 'CNavItem',
             name: 'Bangunan Renovasi',
-            to: '/bangunan/bangunan-renovasi',
+            to: '/uang-masuk/bangunan/bangunan-renovasi',
           },
           {
             component: 'CNavItem',
             name: 'Lain Lain',
-            to: '/bangunan/lain-lain',
+            to: '/uang-masuk/bangunan/lain-lain',
           },
         ],
       },
       {
         component: 'CNavGroup',
         name: 'Assets',
-        to: '/manajemen/karyawan',
+        to: '/uang-masuk/assets',
         icon: 'cil-cursor',
 
         items: [
           {
             component: 'CNavItem',
             name: 'Estimasi',
-            to: '/assets/estimasi',
+            to: '/uang-masuk/assets/estimasi',
           },
           {
             component: 'CNavItem',
             name: 'Jual Asset',
-            to: '/assets/jual-asset',
+            to: '/uang-masuk/assets/jual-asset',
           },
           {
             component: 'CNavItem',
             name: 'Jual Kartu',
-            to: '/assets/jual-kartu',
+            to: '/uang-masuk/assets/jual-kartu',
           },
         ],
       },
@@ -80,7 +80,7 @@ export default [
       {
         component: 'CNavItem',
         name: 'Deposito',
-        to: '/deposito',
+        to: '/uang-keluar/deposito',
         icon: 'cil-chart-pie',
       },
     ],
