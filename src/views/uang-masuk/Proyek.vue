@@ -4,6 +4,7 @@ import { ref, reactive, computed, nextTick } from 'vue'
 // Modal visibility
 const visibleLiveDemo = ref(false)
 const visibleLiveDemo2 = ref(false)
+const visibleLiveDemo3 = ref(false)
 
 // Mode: tambah atau edit
 const isEditMode = ref(false)
@@ -101,6 +102,10 @@ function resetForm() {
 // Hapus proyek
 const toBeDeletedIndex = ref(null)
 
+function addVoucher(index) {
+  visibleLiveDemo3.value = true
+}
+
 function confirmDelete(index) {
   toBeDeletedIndex.value = index
   visibleLiveDemo2.value = true
@@ -197,6 +202,11 @@ function deleteProject() {
               <li class="dropdown-item">
                 <a href="#" class="text-decoration-none" @click.prevent="editProject(index)"
                   >Ubah</a
+                >
+              </li>
+              <li class="dropdown-item">
+                <a href="#" class="text-decoration-none" @click.prevent="addVoucher(index)"
+                  >Tambah Voucher</a
                 >
               </li>
               <li class="dropdown-item">
@@ -303,6 +313,46 @@ function deleteProject() {
       <CButton color="primary" @click="submitForm">
         {{ isEditMode ? 'Perbarui' : 'Simpan' }}
       </CButton>
+    </CModalFooter>
+  </CModal>
+
+  <!-- Modal Voucher-->
+  <CModal
+    :visible="visibleLiveDemo3"
+    @close="
+      () => {
+        visibleLiveDemo3 = false
+      }
+    "
+    aria-labelledby="LiveDemoExampleLabel"
+  >
+    <CModalHeader>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah Voucher</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <CForm>
+        <CFormInput
+          type="text"
+          id="exampleFormControlInput1"
+          label="Voucher"
+          placeholder="Masukkan voucher"
+          text="Masukan voucher untuk coret harga lama"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            visibleLiveDemo3 = false
+          }
+        "
+      >
+        Tutup
+      </CButton>
+      <CButton color="primary">Submit</CButton>
     </CModalFooter>
   </CModal>
 
