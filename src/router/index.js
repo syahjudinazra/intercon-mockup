@@ -119,6 +119,11 @@ const routes = [
         component: () => import('@/views/users/KelolaUsers.vue'),
       },
       {
+        path: 'data-warga',
+        name: 'Data Warga',
+        component: () => import('@/views/DataWarga.vue'),
+      },
+      {
         path: 'semua-aktivitas',
         name: 'Semua Aktivitas',
         component: () => import('@/views/SemuaAktivitas.vue'),
