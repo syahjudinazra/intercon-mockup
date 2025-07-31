@@ -17,7 +17,9 @@ const projects = ref([
     tanggalMulai: '2025-07-18',
     nama: 'Pembangunan Jalan',
     biaya: 'Rp. 50.000.000,00',
-    tanggalSelesai: '2025-07-25',
+    pembayaranTermin1: 'Rp. 25.000.000,00',
+    pembayaranTermin2: 'Rp. 25.000.000,00',
+    status: 'Antrian',
     keterangan: 'Proyek pemerintah daerah',
   },
   {
@@ -25,7 +27,9 @@ const projects = ref([
     tanggalMulai: '2025-07-11',
     nama: 'Pembangunan jembatan',
     biaya: 'Rp. 30.000.000,00',
-    tanggalSelesai: '2025-07-20',
+    pembayaranTermin1: 'Rp. 15.000.000,00',
+    pembayaranTermin2: 'Rp. 15.000.000,00',
+    status: 'Diproses',
     keterangan: 'Jembatan penghubung desa',
   },
   {
@@ -33,7 +37,9 @@ const projects = ref([
     tanggalMulai: '2025-07-12',
     nama: 'Perbaikan pagar',
     biaya: 'Rp. 5.000.000,00',
-    tanggalSelesai: '2025-07-16',
+    pembayaranTermin1: 'Rp. 2.500.000,00',
+    pembayaranTermin2: 'Rp. 2.500.000,00',
+    status: 'Selesai',
     keterangan: 'Sekolah dasar negeri',
   },
 ])
@@ -43,7 +49,7 @@ const form = reactive({
   tanggalMulai: '',
   nama: '',
   biaya: '',
-  tanggalSelesai: '',
+  status: '',
   keterangan: '',
 })
 
@@ -67,6 +73,20 @@ const filteredProjects = computed(() => {
     return matchesSearch && matchesDate
   })
 })
+
+// Get badge class based on status
+function getBadgeClass(status) {
+  switch (status) {
+    case 'Antrian':
+      return 'badge badge-secondary text-white'
+    case 'Diproses':
+      return 'badge badge-primary text-white'
+    case 'Selesai':
+      return 'badge badge-success text-white'
+    default:
+      return 'badge badge-secondary text-white'
+  }
+}
 
 // Simpan / Update proyek
 function submitForm() {
@@ -93,7 +113,7 @@ function resetForm() {
   form.tanggalMulai = ''
   form.nama = ''
   form.biaya = ''
-  form.tanggalSelesai = ''
+  form.status = ''
   form.keterangan = ''
   isEditMode.value = false
   selectedIndex.value = null
@@ -174,7 +194,10 @@ function deleteProject() {
         <th scope="col">Tanggal Mulai</th>
         <th scope="col">Nama Proyek</th>
         <th scope="col">Biaya Proyek</th>
-        <th scope="col">Tanggal Selesai</th>
+        <th scope="col">Pembayaran Termin ke-1</th>
+        <th scope="col">Pembayaran Termin ke-2</th>
+        <th scope="col">Biaya Proyek</th>
+        <th scope="col">Status</th>
         <th scope="col">Aksi</th>
       </tr>
     </thead>
@@ -184,7 +207,13 @@ function deleteProject() {
         <td>{{ project.tanggalMulai }}</td>
         <td>{{ project.nama }}</td>
         <td>{{ project.biaya }}</td>
-        <td>{{ project.tanggalSelesai }}</td>
+        <td>{{ project.pembayaranTermin1 }}</td>
+        <td>{{ project.pembayaranTermin2 }}</td>
+        <td>
+          <span :class="getBadgeClass(project.status)">
+            {{ project.status }}
+          </span>
+        </td>
         <td class="d-flex gap-2">
           <a href="#" class="text-primary text-decoration-none" @click.prevent="editProject(index)"
             >Lihat</a
@@ -210,7 +239,7 @@ function deleteProject() {
                 >
               </li>
               <li class="dropdown-item">
-                <a href="#" class="text-decoration-none">Download PDF</a>
+                <a href="#" class="text-decoration-none">Approval Proyek</a>
               </li>
               <li class="dropdown-item">
                 <a href="#" class="text-decoration-none" @click.prevent="confirmDelete(index)"
@@ -285,6 +314,24 @@ function deleteProject() {
       </CForm>
       <CForm class="mb-3">
         <CFormInput
+          type="text"
+          id="pembayaran-termin1"
+          label="Pembayaran Termin ke-1"
+          placeholder="Masukan pembayaran termin ke-1"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3">
+        <CFormInput
+          type="text"
+          id="pembayaran-termin2"
+          label="Pembayaran Termin ke-2"
+          placeholder="Masukan pembayaran termin ke-2"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3">
+        <CFormInput
           type="date"
           id="tanggal-selesai"
           label="Tanggal selesai"
@@ -294,10 +341,46 @@ function deleteProject() {
       </CForm>
       <CFormTextarea
         id="exampleFormControlTextarea1"
+        class="mb-3"
         label="Keterangan"
         placeholder="Deskripsi, alamat, dsb"
         rows="3"
       ></CFormTextarea>
+      <CFormSelect
+        class="mb-3"
+        id="exampleFormControlSelect1"
+        label="Pilih status"
+        :options="[
+          { label: 'Pilih status', value: '' },
+          { label: 'Antrian', value: '1' },
+          { label: 'Diproses', value: '2' },
+          { label: 'Selesai', value: '3' },
+        ]"
+      ></CFormSelect>
+      <CForm class="mb-3">
+        <CFormInput
+          type="file"
+          id="dokumen-approval"
+          label="Dokumen approval proyek"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3">
+        <CFormInput
+          type="file"
+          id="proyek-sebelum"
+          label="Bukti sebelum dikerjakan"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3">
+        <CFormInput
+          type="file"
+          id="proyek-selesai"
+          label="Bukti setelah selesai dikerjakan"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
     </CModalBody>
     <CModalFooter>
       <CButton
@@ -385,3 +468,33 @@ function deleteProject() {
     </CModalFooter>
   </CModal>
 </template>
+
+<style scoped>
+.badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.375rem;
+}
+
+.badge-secondary {
+  background-color: #6c757d;
+}
+
+.badge-primary {
+  background-color: #0d6efd;
+}
+
+.badge-success {
+  background-color: #198754;
+}
+
+.text-white {
+  color: white !important;
+}
+</style>
