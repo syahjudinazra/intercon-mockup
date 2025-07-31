@@ -9,11 +9,50 @@ const penyusutan = ref([
 ])
 </script>
 <template>
-  <h2>Komplain</h2>
-  <div class="d-flex justify-content-between gap-2 mb-3">
-    <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
+  <h2>Komplain Saya</h2>
+  <div class="my-komplain-form">
+    <CForm class="row g-3">
+      <CCol md="6">
+        <CFormLabel for="inputEmail4">Nama Pengguna</CFormLabel>
+        <CFormInput type="text" id="inputEmail4" placeholder="Auto generated from user login" />
+      </CCol>
+      <CCol md="6">
+        <CFormLabel for="inputDAte">Tanggal</CFormLabel>
+        <CFormInput type="date" id="inputDAte" />
+      </CCol>
+      <CCol xs="12">
+        <CFormLabel for="inputKomplain">Komplain Saya</CFormLabel>
+        <CFormInput id="inputKomplain" placeholder="Pohon tumbang, Jalan rusak, dsb" />
+      </CCol>
+      <CCol xs="12">
+        <CFormTextarea
+          id="exampleFormControlTextarea1"
+          label="Keterangan"
+          placeholder="Detail Komplain, Deskripsi, Alamat, dsb"
+          rows="3"
+        ></CFormTextarea>
+      </CCol>
+      <CCol xs="12">
+        <CFormInput
+          type="file"
+          class="mb-3"
+          id="formFile"
+          label="Upload bukti komplain (Optional)"
+        />
+      </CCol>
+      <CCol xs="12">
+        <CButton type="submit" color="primary" class="mb-3">Submit Komplain</CButton>
+      </CCol>
+    </CForm>
+  </div>
+  <div class="d-flex justify-content-end gap-2 mb-3">
     <div class="utility-table d-flex gap-2">
-      <CButton color="danger">PDF</CButton>
+      <CInputGroup>
+        <CFormInput placeholder="Cari..." aria-label="Cari..." aria-describedby="button-addon2" />
+        <CButton type="button" color="secondary" variant="outline" id="button-addon2"
+          >Search</CButton
+        >
+      </CInputGroup>
       <CDropdown variant="btn-group">
         <CDropdownToggle color="success">Excel</CDropdownToggle>
         <CDropdownMenu>
@@ -21,12 +60,6 @@ const penyusutan = ref([
           <CDropdownItem href="#">Import data</CDropdownItem>
         </CDropdownMenu>
       </CDropdown>
-      <CInputGroup>
-        <CFormInput placeholder="Cari..." aria-label="Cari..." aria-describedby="button-addon2" />
-        <CButton type="button" color="secondary" variant="outline" id="button-addon2"
-          >Search</CButton
-        >
-      </CInputGroup>
     </div>
   </div>
   <table class="table table-hover table-bordered">
@@ -85,9 +118,6 @@ const penyusutan = ref([
                 >
                   Ubah
                 </a>
-              </li>
-              <li class="dropdown-item">
-                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
               </li>
               <li class="dropdown-item">
                 <a
@@ -211,6 +241,15 @@ const penyusutan = ref([
           id="tanggal"
           label="Tanggal"
           placeholder="Masukan tanggal"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
+      <CForm class="mb-3">
+        <CFormInput
+          type="text"
+          id="pengguna"
+          label="Nama Pengguna"
+          placeholder="Masukan nama pengguna"
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
