@@ -1,12 +1,61 @@
 <script setup>
-import { ref } from 'vue'
-const visibleLiveDemo = ref(false)
-const visibleLiveDemo2 = ref(false)
+import { ref, watch } from 'vue'
+
+const data = [
+  {
+    date: '18/07/2025',
+    category: 'Bangunan Cluster A',
+    nominal: 'Rp. 250.000',
+    coordination: 'Rp. 50.000',
+    remaining: 'Rp. 200.000',
+    description: 'Pembangunan baru seluas 100 meter persegi',
+  },
+  {
+    date: '11/07/2025',
+    category: 'Bangunan Cluster Mawar',
+    nominal: 'Rp. 550.000',
+    coordination: 'Rp. 50.000',
+    remaining: 'Rp. 500.000',
+    description: 'Pembangunan baru seluas 150 meter persegi',
+  },
+]
+
+const showModal = ref({ coordination: false })
+const selectedIndex = ref(null)
+const inputCoordination = ref('')
+const calculatedSisa = ref('')
+
+const toggleModal = (type, state = true, index = null) => {
+  showModal.value[type] = state
+  if (type === 'coordination' && state && index !== null) {
+    selectedIndex.value = index
+    inputCoordination.value = ''
+    calculatedSisa.value = ''
+  }
+}
+
+// Watch untuk menghitung sisa
+watch([inputCoordination, selectedIndex], () => {
+  const nominalString = data[selectedIndex.value]?.nominal || '0'
+  const nominalCleaned = parseInt(nominalString.replace(/[^0-9]/g, ''), 10)
+  const coordinationAmount = parseInt(inputCoordination.value, 10) || 0
+
+  if (nominalCleaned >= coordinationAmount) {
+    const result = nominalCleaned - coordinationAmount
+    calculatedSisa.value = `Rp. ${new Intl.NumberFormat('id-ID').format(result)},00`
+  } else {
+    calculatedSisa.value = ''
+  }
+})
 </script>
+
 <template>
   <h2>Bangunan Renovasi</h2>
+
+  <!-- Toolbar -->
   <div class="d-flex justify-content-between gap-2 mb-3">
-    <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
+    <CButton color="primary" @click="toggleModal('view')">Tambah data</CButton>
+
     <div class="utility-table d-flex gap-2">
       <CButton color="danger">PDF</CButton>
       <CDropdown variant="btn-group">
@@ -17,146 +66,70 @@ const visibleLiveDemo2 = ref(false)
         </CDropdownMenu>
       </CDropdown>
       <CInputGroup>
-        <CFormInput placeholder="Cari..." aria-label="Cari..." aria-describedby="button-addon2" />
-        <CButton type="button" color="secondary" variant="outline" id="button-addon2"
-          >Search</CButton
-        >
+        <CFormInput placeholder="Cari..." aria-label="Cari..." />
+        <CButton type="button" color="secondary" variant="outline">Search</CButton>
       </CInputGroup>
     </div>
   </div>
+
+  <!-- Table -->
   <table class="table table-hover table-bordered">
     <thead>
       <tr>
-        <th scope="col">No</th>
-        <th scope="col">Tanggal Masuk</th>
-        <th scope="col">Kategori</th>
-        <th scope="col">Nominal</th>
-        <th scope="col">Keterangan</th>
-        <th scope="col">Aksi</th>
+        <th>No</th>
+        <th>Tanggal Masuk</th>
+        <th>Kategori</th>
+        <th>Nominal</th>
+        <th>Uang Kordinasi</th>
+        <th>Sisa</th>
+        <th>Keterangan</th>
+        <th>Aksi</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>18/07/2025</td>
-        <td>Bangunan Cluster C</td>
-        <td>Rp. 550.000,00</td>
-        <td>Telah melakukan renovasi kanopi bagian depan rumah di Cluster C blok 70</td>
+      <tr v-for="(item, index) in data" :key="index">
+        <td>{{ index + 1 }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.nominal }}</td>
+        <td>{{ item.coordination }}</td>
+        <td>{{ item.remaining }}</td>
+        <td>{{ item.description }}</td>
         <td class="d-flex gap-2">
-          <a
-            href="#"
-            :class="{ 'text-decoration-none': true }"
-            @click.prevent="
-              () => {
-                visibleLiveDemo = true
-              }
-            "
-            class="text-primary"
+          <a href="#" class="text-primary text-decoration-none" @click.prevent="toggleModal('view')"
+            >Lihat</a
           >
-            Lihat
-          </a>
-          <!-- Default dropend button -->
+
           <div class="btn-group dropend">
-            <a
-              href="#"
-              class="dropdown-toggle text-decoration-none"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+            <a href="#" class="dropdown-toggle text-decoration-none" data-bs-toggle="dropdown"
+              >Lainnya</a
             >
-              Lainya
-            </a>
             <ul class="dropdown-menu">
-              <li class="dropdown-item">
+              <li>
                 <a
                   href="#"
-                  :class="{ 'text-decoration-none': true }"
-                  @click.prevent="
-                    () => {
-                      visibleLiveDemo = true
-                    }
-                  "
+                  class="dropdown-item text-decoration-none"
+                  @click.prevent="toggleModal('view')"
+                  >Ubah</a
                 >
-                  Ubah
-                </a>
               </li>
-              <li class="dropdown-item">
-                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
-              </li>
-              <li class="dropdown-item">
+              <li>
                 <a
                   href="#"
-                  :class="{ 'text-decoration-none': true }"
-                  @click.prevent="
-                    () => {
-                      visibleLiveDemo2 = true
-                    }
-                  "
+                  class="dropdown-item text-decoration-none"
+                  @click.prevent="toggleModal('coordination', true, index)"
                 >
-                  Hapus
+                  Kordinasi
                 </a>
               </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>11/07/2025</td>
-        <td>Bangunan Cluster Angsa</td>
-        <td>Rp. 150.000,00</td>
-        <td>Telah melakukan renovasi halaman bagian depan rumah di Cluster Angsa blok 30</td>
-        <td class="d-flex gap-2">
-          <a
-            href="#"
-            :class="{ 'text-decoration-none': true }"
-            @click.prevent="
-              () => {
-                visibleLiveDemo = true
-              }
-            "
-            class="text-primary"
-          >
-            Lihat
-          </a>
-          <!-- Default dropend button -->
-          <div class="btn-group dropend">
-            <a
-              href="#"
-              class="dropdown-toggle text-decoration-none"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Lainya
-            </a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item">
+              <li><a href="#" class="dropdown-item text-decoration-none">Download Approval</a></li>
+              <li>
                 <a
                   href="#"
-                  :class="{ 'text-decoration-none': true }"
-                  @click.prevent="
-                    () => {
-                      visibleLiveDemo = true
-                    }
-                  "
+                  class="dropdown-item text-decoration-none"
+                  @click.prevent="toggleModal('delete')"
+                  >Hapus</a
                 >
-                  Ubah
-                </a>
-              </li>
-              <li class="dropdown-item">
-                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
-              </li>
-              <li class="dropdown-item">
-                <a
-                  href="#"
-                  :class="{ 'text-decoration-none': true }"
-                  @click.prevent="
-                    () => {
-                      visibleLiveDemo2 = true
-                    }
-                  "
-                >
-                  Hapus
-                </a>
               </li>
             </ul>
           </div>
@@ -164,124 +137,95 @@ const visibleLiveDemo2 = ref(false)
       </tr>
     </tbody>
   </table>
+
+  <!-- Footer Pagination -->
   <div class="footer-table d-flex justify-content-between">
     <div>
-      <span>Menampilkan 1-2 dari 2 data</span>
+      <span>Menampilkan 1-{{ data.length }} dari {{ data.length }} data</span>
     </div>
-    <div>
-      <!-- Pagination -->
-      <CPagination align="end" aria-label="Page navigation example">
-        <CPaginationItem aria-label="Previous" href="#" disabled
-          ><span aria-hidden="true">&laquo;</span></CPaginationItem
-        >
-        <CPaginationItem href="#" active>1</CPaginationItem>
-        <CPaginationItem href="#">2</CPaginationItem>
-        <CPaginationItem href="#">3</CPaginationItem>
-        <CPaginationItem aria-label="Next" href="#"
-          ><span aria-hidden="true">&raquo;</span></CPaginationItem
-        >
-      </CPagination>
-    </div>
+    <CPagination align="end">
+      <CPaginationItem disabled>&laquo;</CPaginationItem>
+      <CPaginationItem active>1</CPaginationItem>
+      <CPaginationItem>2</CPaginationItem>
+      <CPaginationItem>3</CPaginationItem>
+      <CPaginationItem>&raquo;</CPaginationItem>
+    </CPagination>
   </div>
-  <!-- Modal -->
-  <CModal
-    :visible="visibleLiveDemo"
-    @close="
-      () => {
-        visibleLiveDemo = false
-      }
-    "
-    aria-labelledby="LiveDemoExampleLabel"
-  >
+
+  <!-- Modal: Kordinasi -->
+  <CModal :visible="showModal.coordination" @close="toggleModal('coordination', false)">
     <CModalHeader>
-      <CModalTitle id="LiveDemoExampleLabel">Tambah Proyek</CModalTitle>
+      <CModalTitle>Uang Kordinasi</CModalTitle>
     </CModalHeader>
     <CModalBody>
       <CForm class="mb-3">
         <CFormInput
-          type="date"
-          id="tanggal-masuk"
-          label="Tanggal masuk"
-          placeholder="Masukan tanggal masuk"
-          aria-describedby="exampleFormControlInputHelpInline"
-        />
-      </CForm>
-      <CFormSelect
-        class="mb-3"
-        id="exampleFormControlSelect1"
-        label="Pilih kategori"
-        :options="[
-          { label: 'Pilihan', value: '' },
-          { label: 'Iuran warga', value: '1' },
-          { label: 'Iuran lingkungan', value: '2' },
-          { label: 'Iuran keamanan', value: '3' },
-        ]"
-      ></CFormSelect>
-      <CForm class="mb-3">
-        <CFormInput
-          type="number"
-          id="nominal"
           label="Nominal"
-          placeholder="Masukan nominal"
-          aria-describedby="exampleFormControlInputHelpInline"
+          :value="data[selectedIndex]?.nominal || ''"
+          readonly
+          placeholder="Data nominal lama"
+        />
+        <CFormInput
+          label="Uang Kordinasi"
+          v-model="inputCoordination"
+          type="number"
+          placeholder="Masukkan uang kordinasi"
+          text="Masukan uang kordinasi untuk mengurangi harga lama"
+        />
+        <CFormInput
+          label="Sisa"
+          :value="calculatedSisa"
+          readonly
+          placeholder="Auto generated nominal dikurang uang kordinasi"
         />
       </CForm>
-      <CFormTextarea
-        class="mb-3"
-        id="exampleFormControlTextarea1"
-        label="Keterangan"
-        placeholder="Deskripsi, alamat, dsb"
-        rows="3"
-      ></CFormTextarea>
-      <CFormInput type="file" id="formFile" label="Upload bukti pembayaran bangunan renovasi" />
     </CModalBody>
     <CModalFooter>
-      <CButton
-        color="secondary"
-        @click="
-          () => {
-            visibleLiveDemo = false
-          }
-        "
-      >
-        Tutup
-      </CButton>
+      <CButton color="secondary" @click="toggleModal('coordination', false)">Tutup</CButton>
       <CButton color="primary">Submit</CButton>
     </CModalFooter>
   </CModal>
 
-  <!-- Modal Hapus-->
-  <CModal
-    :visible="visibleLiveDemo2"
-    @close="
-      () => {
-        visibleLiveDemo2 = false
-      }
-    "
-    aria-labelledby="LiveDemoExampleLabel"
-  >
-    <CModalHeader>
-      <CModalTitle id="LiveDemoExampleLabel">Contoh peringatan hapus data</CModalTitle>
-    </CModalHeader>
+  <!-- Modal: Tambah/Ubah -->
+  <CModal :visible="showModal.view" @close="toggleModal('view', false)">
+    <CModalHeader><CModalTitle>Tambah Proyek</CModalTitle></CModalHeader>
+    <CModalBody>
+      <CForm class="mb-3">
+        <CFormInput type="date" label="Tanggal masuk" />
+        <CFormSelect
+          label="Pilih kategori"
+          :options="[
+            { label: 'Pilihan', value: '' },
+            { label: 'Iuran warga', value: '1' },
+            { label: 'Iuran lingkungan', value: '2' },
+            { label: 'Iuran keamanan', value: '3' },
+          ]"
+        />
+        <CFormInput type="number" label="Nominal" />
+        <CFormInput type="number" label="Uang Kordinasi" />
+        <CFormInput type="number" label="Sisa" />
+        <CFormTextarea label="Keterangan" placeholder="Deskripsi, alamat, dsb" rows="3" />
+        <CFormInput type="file" label="Upload bukti pembayaran bangunan baru" />
+      </CForm>
+    </CModalBody>
+    <CModalFooter>
+      <CButton color="secondary" @click="toggleModal('view', false)">Tutup</CButton>
+      <CButton color="primary">Submit</CButton>
+    </CModalFooter>
+  </CModal>
+
+  <!-- Modal: Hapus -->
+  <CModal :visible="showModal.delete" @close="toggleModal('delete', false)">
+    <CModalHeader><CModalTitle>Konfirmasi Hapus</CModalTitle></CModalHeader>
     <CModalBody>Apakah anda yakin ingin menghapus data ini?</CModalBody>
     <CModalFooter>
-      <CButton
-        color="secondary"
-        @click="
-          () => {
-            visibleLiveDemo2 = false
-          }
-        "
-      >
-        Tutup
-      </CButton>
+      <CButton color="secondary" @click="toggleModal('delete', false)">Tutup</CButton>
       <CButton color="danger">Hapus</CButton>
     </CModalFooter>
   </CModal>
 </template>
 
 <style scoped>
-/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
