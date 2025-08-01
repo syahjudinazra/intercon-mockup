@@ -4,7 +4,7 @@ const visibleLiveDemo = ref(false)
 const visibleLiveDemo2 = ref(false)
 </script>
 <template>
-  <h2>Uang Masuk</h2>
+  <h2>Uang Keluar</h2>
   <div class="d-flex justify-content-between gap-2 mb-3">
     <CButton color="primary" @click="visibleLiveDemo = true">Tambah data</CButton>
     <div class="utility-table d-flex gap-2">
@@ -40,7 +40,7 @@ const visibleLiveDemo2 = ref(false)
         <th scope="row">1</th>
         <td>18/07/2025</td>
         <td>Iuran warga</td>
-        <td>Rp. 150.000,00</td>
+        <td>Rp. 250.000,00</td>
         <td>Saya telah membayar iuran bulan Juli 2025, dan sudah melampirkan bukti pembayaran.</td>
         <td class="d-flex gap-2">
           <a
@@ -80,7 +80,7 @@ const visibleLiveDemo2 = ref(false)
                 </a>
               </li>
               <li class="dropdown-item">
-                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Approval </a>
               </li>
               <li class="dropdown-item">
                 <a
@@ -146,7 +146,7 @@ const visibleLiveDemo2 = ref(false)
                 </a>
               </li>
               <li class="dropdown-item">
-                <a href="#" :class="{ 'text-decoration-none': true }"> Download Pdf </a>
+                <a href="#" :class="{ 'text-decoration-none': true }"> Download Approval </a>
               </li>
               <li class="dropdown-item">
                 <a
@@ -197,15 +197,15 @@ const visibleLiveDemo2 = ref(false)
     aria-labelledby="LiveDemoExampleLabel"
   >
     <CModalHeader>
-      <CModalTitle id="LiveDemoExampleLabel">Tambah Uang Masuk</CModalTitle>
+      <CModalTitle id="LiveDemoExampleLabel">Tambah Proyek</CModalTitle>
     </CModalHeader>
     <CModalBody>
       <CForm class="mb-3">
         <CFormInput
           type="date"
-          id="tanggal-masuk"
-          label="Tanggal masuk"
-          placeholder="Masukan tanggal masuk"
+          id="tanggal-keluar"
+          label="Tanggal keluar"
+          placeholder="Masukan tanggal keluar"
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
@@ -229,6 +229,15 @@ const visibleLiveDemo2 = ref(false)
           aria-describedby="exampleFormControlInputHelpInline"
         />
       </CForm>
+      <CForm class="mb-3">
+        <CFormInput
+          type="text"
+          id="tujuan"
+          label="Tujuan"
+          placeholder="Masukan tujuan"
+          aria-describedby="exampleFormControlInputHelpInline"
+        />
+      </CForm>
       <CFormTextarea
         class="mb-3"
         id="exampleFormControlTextarea1"
@@ -236,7 +245,7 @@ const visibleLiveDemo2 = ref(false)
         placeholder="Deskripsi, alamat, dsb"
         rows="3"
       ></CFormTextarea>
-      <CFormInput type="file" id="formFile" label="Upload bukti uang masuk" />
+      <CFormInput type="file" id="formFile" label="Upload bukti uang keluar" />
     </CModalBody>
     <CModalFooter>
       <CButton

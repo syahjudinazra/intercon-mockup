@@ -13,20 +13,19 @@ export default [
     component: 'CNavGroup',
     name: 'Uang Masuk',
     to: '/uang-masuk',
-    icon: 'cil-institution',
+    icon: 'cil-money',
     items: [
       {
         component: 'CNavItem',
         name: 'Proyek',
         to: '/uang-masuk/proyek',
-        icon: 'cil-pencil',
+        icon: 'cil-share-alt',
       },
       {
         component: 'CNavGroup',
         name: 'Bangunan',
         to: '/uang-masuk/bangunan',
-        icon: 'cil-puzzle',
-
+        icon: 'cil-institution',
         items: [
           {
             component: 'CNavItem',
@@ -49,8 +48,7 @@ export default [
         component: 'CNavGroup',
         name: 'Assets',
         to: '/uang-masuk/assets',
-        icon: 'cil-cursor',
-
+        icon: 'cil-storage',
         items: [
           {
             component: 'CNavItem',
@@ -69,6 +67,19 @@ export default [
           },
         ],
       },
+      {
+        component: 'CNavGroup',
+        name: 'Operasional',
+        to: '/uang-masuk/operasional',
+        icon: 'cil-people',
+        items: [
+          {
+            component: 'CNavItem',
+            name: 'Uang Masuk',
+            to: '/uang-masuk/operasional',
+          },
+        ],
+      },
     ],
   },
   {
@@ -77,6 +88,19 @@ export default [
     to: '/uang-keluar',
     icon: 'cil-exit-to-app',
     items: [
+      {
+        component: 'CNavGroup',
+        name: 'Operasional',
+        to: '/uang-keluar/operasional',
+        icon: 'cil-people',
+        items: [
+          {
+            component: 'CNavItem',
+            name: 'Uang Keluar',
+            to: '/uang-keluar/operasional',
+          },
+        ],
+      },
       {
         component: 'CNavItem',
         name: 'Deposito',
@@ -93,13 +117,13 @@ export default [
   },
   {
     component: 'CNavTitle',
-    name: 'Lainya',
+    name: 'Lainnya',
   },
   {
     component: 'CNavItem',
     name: 'Komplain',
     to: '/komplain',
-    icon: 'cil-notes',
+    icon: 'cil-comment-square',
   },
   {
     component: 'CNavTitle',
@@ -115,6 +139,6 @@ export default [
     component: 'CNavItem',
     name: 'Data Warga',
     to: '/data-warga',
-    icon: 'cil-star',
+    icon: 'cil-people',
   },
 ]

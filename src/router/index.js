@@ -17,69 +17,67 @@ const routes = [
       },
       {
         path: 'uang-masuk',
-        name: 'Uang Masuk',
+        name: 'UangMasuk',
         redirect: '/uang-masuk/proyek',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
+        component: { render: () => h(resolveComponent('router-view')) },
         children: [
           {
+            path: 'operasional',
+            name: 'UangMasukOperasional',
+            component: { render: () => h(resolveComponent('router-view')) },
+            children: [
+              {
+                path: '',
+                name: 'UangMasukOperasionalIndex',
+                component: () => import('@/views/uang-masuk/operasional/UangMasuk.vue'),
+              },
+            ],
+          },
+          {
             path: 'proyek',
-            name: 'Proyek',
+            name: 'UangMasukProyek',
             component: () => import('@/views/uang-masuk/Proyek.vue'),
           },
           {
             path: 'bangunan',
-            name: 'Bangunan',
-            redirect: '/uang-masuk/bangunan/bangunan-baru',
-            component: {
-              render() {
-                return h(resolveComponent('router-view'))
-              },
-            },
+            name: 'UangMasukBangunan',
+            component: { render: () => h(resolveComponent('router-view')) },
             children: [
               {
                 path: 'bangunan-baru',
-                name: 'Bangunan Baru',
+                name: 'BangunanBaru',
                 component: () => import('@/views/uang-masuk/bangunan/BangunanBaru.vue'),
               },
               {
                 path: 'bangunan-renovasi',
-                name: 'Bangunan Renovasi',
+                name: 'BangunanRenovasi',
                 component: () => import('@/views/uang-masuk/bangunan/BangunanRenovasi.vue'),
               },
               {
                 path: 'lain-lain',
-                name: 'Lain Lain',
+                name: 'BangunanLainLain',
                 component: () => import('@/views/uang-masuk/bangunan/LainLain.vue'),
               },
             ],
           },
           {
             path: 'assets',
-            name: 'Assets',
-            redirect: '/uang-masuk/assets/estimasi',
-            component: {
-              render() {
-                return h(resolveComponent('router-view'))
-              },
-            },
+            name: 'UangMasukAssets',
+            component: { render: () => h(resolveComponent('router-view')) },
             children: [
               {
                 path: 'estimasi',
-                name: 'Estimasi',
+                name: 'AssetsEstimasi',
                 component: () => import('@/views/uang-masuk/assets/Estimasi.vue'),
               },
               {
                 path: 'jual-asset',
-                name: 'Jual Asset',
+                name: 'AssetsJualAsset',
                 component: () => import('@/views/uang-masuk/assets/JualAsset.vue'),
               },
               {
                 path: 'jual-kartu',
-                name: 'Jual Kartu',
+                name: 'AssetsJualKartu',
                 component: () => import('@/views/uang-masuk/assets/JualKartu.vue'),
               },
             ],
@@ -88,17 +86,25 @@ const routes = [
       },
       {
         path: 'uang-keluar',
-        name: 'Uang Keluar',
-        redirect: '/uang-keluar/deposito',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
+        name: 'UangKeluar',
+        redirect: '/uang-keluar/operasional',
+        component: { render: () => h(resolveComponent('router-view')) },
         children: [
           {
+            path: 'operasional',
+            name: 'UangKeluarOperasional',
+            component: { render: () => h(resolveComponent('router-view')) },
+            children: [
+              {
+                path: '',
+                name: 'UangKeluarOperasionalIndex',
+                component: () => import('@/views/uang-keluar/operasional/UangKeluar.vue'),
+              },
+            ],
+          },
+          {
             path: 'deposito',
-            name: 'Deposito',
+            name: 'UangKeluarDeposito',
             component: () => import('@/views/uang-keluar/Deposito.vue'),
           },
         ],
